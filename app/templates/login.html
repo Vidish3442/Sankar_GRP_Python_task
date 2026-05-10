@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{# Login form for existing users. #}
+
+{% block title %}Login | Smart Tasks{% endblock %}
+
+{% block content %}
+<section class="auth-panel">
+    <h1>Login</h1>
+    <form method="post" class="form">
+        <label>
+            Username
+            <input type="text" name="username" required autocomplete="username">
+        </label>
+        <label>
+            Password
+            <input type="password" name="password" required autocomplete="current-password">
+        </label>
+        <button type="submit">Login</button>
+    </form>
+    <p class="muted">New here? <a href="{{ url_for('auth.register') }}">Create an account</a></p>
+</section>
+{% endblock %}

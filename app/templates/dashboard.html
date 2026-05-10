@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{# Main task dashboard with form, list, and analytics. #}
+
+{% block title %}Dashboard | Smart Tasks{% endblock %}
+
+{% block content %}
+<section class="dashboard-head">
+    <div>
+        <h1>Task Dashboard</h1>
+        <p class="muted">Welcome, {{ username }}. Your changes sync live across open tabs.</p>
+    </div>
+    <div id="liveStatus" class="live-status">Connecting...</div>
+</section>
+
+<section class="analytics-grid" id="analytics">
+    <article>
+        <span>Total Tasks</span>
+        <strong data-key="total_tasks">0</strong>
+    </article>
+    <article>
+        <span>Completed</span>
+        <strong data-key="completed_tasks">0</strong>
+    </article>
+    <article>
+        <span>Pending</span>
+        <strong data-key="pending_tasks">0</strong>
+    </article>
+    <article>
+        <span>Completion</span>
+        <strong><span data-key="completion_percentage">0</span>%</strong>
+    </article>
+</section>
+
+<section class="workspace">
+    <form id="taskForm" class="task-form">
+        <h2>Add Task</h2>
+        <input type="hidden" id="taskId">
+        <label>
+            Title
+            <input id="title" type="text" required maxlength="150">
+        </label>
+        <label>
+            Description
+            <textarea id="description" rows="4"></textarea>
+        </label>
+        <div class="form-row">
+            <label>
+                Priority
+                <select id="priority">
+                    <option>Low</option>
+                    <option selected>Medium</option>
+                    <option>High</option>
+                </select>
+            </label>
+            <label>
+                Status
+                <select id="status">
+                    <option selected>Pending</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                </select>
+            </label>
+        </div>
+        <div class="button-row">
+            <button type="submit" id="saveButton">Add Task</button>
+            <button type="button" id="resetButton" class="secondary">Clear</button>
+        </div>
+    </form>
+
+    <section class="task-list-panel">
+        <h2>Tasks</h2>
+        <div id="taskList" class="task-list"></div>
+    </section>
+</section>
+
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}
